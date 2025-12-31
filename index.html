@@ -7,340 +7,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --pistachio: #93C572;
-            --pistachio-dark: #6B9B4D;
-            --pistachio-light: #B5D99C;
-            --shell-brown: #8B7355;
-            --cream: #FAF8F3;
-            --sand: #E8E3D6;
-            --charcoal: #2C2C2C;
-            --white: #FFFFFF;
-            --gray-light: #D4CFC0;
-            --gray-medium: #9B9B9B;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--cream);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Geometric Background Pattern */
-        .geometric-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.03;
-            background-image: 
-                repeating-linear-gradient(45deg, var(--pistachio) 0px, var(--pistachio) 1px, transparent 1px, transparent 60px),
-                repeating-linear-gradient(-45deg, var(--pistachio) 0px, var(--pistachio) 1px, transparent 1px, transparent 60px);
-            animation: subtleFloat 20s ease-in-out infinite;
-        }
-
-        @keyframes subtleFloat {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(10px, -10px); }
-        }
-
-        .container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .login-card {
-            background: transparent;
-            width: 100%;
-            max-width: 420px;
-            padding: 0;
-            position: relative;
-            animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes cardEntry {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo-section {
-            margin-bottom: 3.5rem;
-            text-align: center;
-        }
-
-        .logo {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.75rem;
-            font-weight: 700;
-            color: var(--charcoal);
-            letter-spacing: -0.03em;
-            margin-bottom: 0.75rem;
-            animation: logoFade 1s ease-out 0.2s backwards;
-        }
-
-        @keyframes logoFade {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .tagline {
-            font-size: 0.938rem;
-            color: var(--gray-medium);
-            font-weight: 400;
-            letter-spacing: 0;
-            animation: logoFade 1s ease-out 0.4s backwards;
-        }
-
-        .login-form {
-            animation: formFade 1s ease-out 0.6s backwards;
-        }
-
-        @keyframes formFade {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--charcoal);
-            margin-bottom: 0.625rem;
-            letter-spacing: 0;
-        }
-
-        input {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1rem;
-            color: var(--charcoal);
-            background: var(--white);
-            border: 1.5px solid var(--gray-light);
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--pistachio);
-            box-shadow: 0 0 0 4px rgba(147, 197, 114, 0.1);
-        }
-
-        input::placeholder {
-            color: var(--gray-medium);
-            font-weight: 400;
-        }
-
-        .form-footer {
-            margin-bottom: 2.5rem;
-            text-align: right;
-        }
-
-        .forgot-password {
-            font-size: 0.875rem;
-            color: var(--gray-medium);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 400;
-        }
-
-        .forgot-password:hover {
-            color: var(--pistachio-dark);
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 1.125rem 2rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--white);
-            background: var(--pistachio);
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            letter-spacing: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-login::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .btn-login:hover::before {
-            left: 100%;
-        }
-
-        .btn-login:hover {
-            background: var(--pistachio-dark);
-            box-shadow: 0 8px 24px rgba(147, 197, 114, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .btn-login:active {
-            transform: translateY(0);
-        }
-
-        .arrow {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-login:hover .arrow {
-            transform: translateX(4px);
-        }
-
-        .footer {
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer p {
-            font-size: 0.813rem;
-            color: var(--gray-medium);
-            font-weight: 400;
-        }
-
-        .footer a {
-            color: var(--pistachio-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .footer a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--pistachio-dark);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-        }
-
-        .footer a:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .footer a:hover {
-            color: var(--pistachio);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem;
-            }
-            
-            .login-card {
-                padding: 0;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
-            }
-            
-            .tagline {
-                font-size: 0.875rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .login-card {
-                padding: 0;
-            }
-            
-            .logo {
-                font-size: 2.25rem;
-            }
-            
-            .logo-section {
-                margin-bottom: 3rem;
-            }
-            
-            .form-group {
-                margin-bottom: 1.5rem;
-            }
-            
-            input {
-                padding: 0.875rem 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="login-page">
+    <!-- Geometric Background -->
     <div class="geometric-bg"></div>
-    
+
+    <!-- Main Container -->
     <div class="container">
         <div class="login-card">
             <div class="logo-section">
                 <h1 class="logo">Renteroll</h1>
-                <p class="tagline">Property Management Suite</p>
+                <p class="tagline">Effortless property management</p>
             </div>
-            
+
             <form class="login-form" id="loginForm">
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -348,79 +28,41 @@
                         type="text" 
                         id="username" 
                         name="username" 
-                        placeholder="Enter your username"
+                        placeholder="Enter your username" 
                         required
                     >
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input 
                         type="password" 
                         id="password" 
                         name="password" 
-                        placeholder="Enter your password"
+                        placeholder="Enter your password" 
                         required
                     >
                 </div>
-                
+
                 <div class="form-footer">
                     <a href="#" class="forgot-password">Forgot password?</a>
                 </div>
-                
+
                 <button type="submit" class="btn-login">
-                    <span>Sign in</span>
-                    <svg class="arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    Sign in
+                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </button>
             </form>
         </div>
     </div>
-    
+
+    <!-- Footer -->
     <footer class="footer">
         <p>Designed + built by <a href="https://kaanesendemir.com" target="_blank" rel="noopener noreferrer">Kaan</a></p>
     </footer>
-    
-    <script>
-        // Handle login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Add a subtle loading state to button
-            const button = this.querySelector('.btn-login');
-            const buttonText = button.querySelector('span');
-            const originalText = buttonText.textContent;
-            
-            buttonText.textContent = 'Signing in...';
-            button.style.opacity = '0.7';
-            button.style.pointerEvents = 'none';
-            
-            // Simulate a brief loading period for better UX
-            setTimeout(() => {
-                // Redirect to dashboard - will create dashboard.html next
-                window.location.href = 'dashboard.html';
-            }, 600);
-        });
 
-        // Add smooth input focus animations
-        const inputs = document.querySelectorAll('input');
-
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateX(2px)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateX(0)';
-            });
-        });
-
-        // Prevent forgot password link from doing anything (placeholder)
-        document.querySelector('.forgot-password').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Password reset functionality coming soon!');
-        });
-    </script>
+    <script src="js/login.js"></script>
 </body>
 </html>

@@ -7,486 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --pistachio: #93C572;
-            --pistachio-dark: #6B9B4D;
-            --pistachio-light: #B5D99C;
-            --shell-brown: #8B7355;
-            --cream: #FAF8F3;
-            --sand: #E8E3D6;
-            --charcoal: #2C2C2C;
-            --white: #FFFFFF;
-            --gray-light: #D4CFC0;
-            --gray-medium: #9B9B9B;
-            --sidebar-width: 280px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--cream);
-            min-height: 100vh;
-            display: flex;
-            overflow-x: hidden;
-        }
-
-        /* Sidebar Navigation */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: var(--white);
-            border-right: 1px solid var(--gray-light);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            overflow-y: auto;
-            z-index: 100;
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-header {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .logo {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--charcoal);
-            letter-spacing: -0.03em;
-            margin-bottom: 1.5rem;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            background: var(--cream);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--pistachio-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .user-avatar svg {
-            width: 20px;
-            height: 20px;
-            color: var(--pistachio-dark);
-        }
-
-        .user-details {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .user-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--charcoal);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .user-role {
-            font-size: 0.75rem;
-            color: var(--gray-medium);
-        }
-
-        .logout-btn {
-            padding: 0.5rem 1rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.813rem;
-            font-weight: 500;
-            color: var(--gray-medium);
-            background: transparent;
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .logout-btn:hover {
-            background: var(--cream);
-            border-color: var(--pistachio);
-            color: var(--pistachio-dark);
-        }
-
-        /* Navigation Menu */
-        .nav-menu {
-            padding: 1rem 0;
-            flex: 1;
-        }
-
-        .nav-item {
-            margin-bottom: 0.25rem;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1.5rem;
-            color: var(--charcoal);
-            text-decoration: none;
-            font-size: 0.938rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .nav-link:hover {
-            background: var(--cream);
-            color: var(--pistachio-dark);
-        }
-
-        .nav-link.active {
-            background: var(--pistachio-light);
-            color: var(--pistachio-dark);
-            font-weight: 600;
-        }
-
-        .nav-link-content {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .nav-icon {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-        }
-
-        .chevron {
-            width: 16px;
-            height: 16px;
-            transition: transform 0.3s ease;
-        }
-
-        .chevron.open {
-            transform: rotate(180deg);
-        }
-
-        /* Submenu */
-        .submenu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .submenu.open {
-            max-height: 500px;
-        }
-
-        .submenu-link {
-            display: block;
-            padding: 0.625rem 1.5rem 0.625rem 3.25rem;
-            color: var(--gray-medium);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 400;
-            transition: all 0.3s ease;
-        }
-
-        .submenu-link:hover {
-            color: var(--pistachio-dark);
-            background: var(--cream);
-        }
-
-        /* Sidebar Footer */
-        .sidebar-footer {
-            padding: 1.5rem 1.5rem 2rem;
-            border-top: 1px solid var(--gray-light);
-            margin-top: auto;
-        }
-
-        .sidebar-footer p {
-            font-size: 0.75rem;
-            color: var(--gray-medium);
-            font-weight: 400;
-            text-align: center;
-        }
-
-        .sidebar-footer a {
-            color: var(--pistachio-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .sidebar-footer a:hover {
-            color: var(--pistachio);
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            padding: 2rem;
-            min-height: 100vh;
-        }
-
-        .page-header {
-            margin-bottom: 2rem;
-        }
-
-        .page-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--charcoal);
-            margin-bottom: 0.5rem;
-        }
-
-        .page-subtitle {
-            font-size: 1rem;
-            color: var(--gray-medium);
-            margin-bottom: 1.5rem;
-        }
-
-        /* Search Bar */
-        .search-container {
-            margin-bottom: 1.5rem;
-        }
-
-        .search-input-wrapper {
-            position: relative;
-            max-width: 400px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.875rem 1rem 0.875rem 3rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.938rem;
-            color: var(--charcoal);
-            background: var(--white);
-            border: 1.5px solid var(--gray-light);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--pistachio);
-            box-shadow: 0 0 0 4px rgba(147, 197, 114, 0.1);
-        }
-
-        .search-input::placeholder {
-            color: var(--gray-medium);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            color: var(--gray-medium);
-            pointer-events: none;
-        }
-
-        /* Residents Table */
-        .residents-container {
-            background: var(--white);
-            border-radius: 16px;
-            border: 1px solid var(--gray-light);
-            overflow: hidden;
-            overflow-x: auto;
-        }
-
-        .residents-table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: auto;
-        }
-
-        .residents-table thead {
-            background: var(--cream);
-        }
-
-        .residents-table th {
-            padding: 1rem 1rem;
-            text-align: left;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--charcoal);
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .residents-table td {
-            padding: 1rem 1rem;
-            font-size: 0.813rem;
-            color: var(--charcoal);
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .residents-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .residents-table tbody tr {
-            transition: background 0.2s ease;
-        }
-
-        .residents-table tbody tr:hover {
-            background: var(--cream);
-        }
-
-        .resident-name {
-            font-weight: 600;
-            color: var(--charcoal);
-            font-size: 0.875rem;
-        }
-
-        .contact-info {
-            color: var(--gray-medium);
-            font-size: 0.75rem;
-        }
-
-        /* Mobile Menu Toggle */
-        .mobile-menu-btn {
-            display: none;
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 101;
-            background: var(--white);
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            padding: 0.75rem;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .mobile-menu-btn svg {
-            width: 24px;
-            height: 24px;
-            color: var(--charcoal);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .residents-table th,
-            .residents-table td {
-                padding: 0.875rem 0.875rem;
-                font-size: 0.75rem;
-            }
-
-            .resident-name {
-                font-size: 0.813rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 5rem 1.5rem 1.5rem;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .page-title {
-                font-size: 1.5rem;
-            }
-
-            .search-input-wrapper {
-                max-width: 100%;
-            }
-
-            .residents-container {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .residents-table {
-                min-width: 900px;
-            }
-
-            .residents-table th,
-            .residents-table td {
-                padding: 0.75rem 0.75rem;
-                font-size: 0.75rem;
-            }
-
-            .resident-name {
-                font-size: 0.813rem;
-            }
-
-            .contact-info {
-                font-size: 0.688rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .residents-table th,
-            .residents-table td {
-                padding: 0.625rem 0.5rem;
-                font-size: 0.688rem;
-            }
-
-            .resident-name {
-                font-size: 0.75rem;
-            }
-
-            .contact-info {
-                font-size: 0.625rem;
-            }
-        }
-
-        /* Overlay for mobile */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 99;
-        }
-
-        .sidebar-overlay.show {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/residents.css">
 </head>
-<body>
+<body class="dashboard-page">
     <!-- Mobile Menu Button -->
     <button class="mobile-menu-btn" id="mobileMenuBtn">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -662,7 +186,7 @@
                     <tr>
                         <td class="resident-name">Sarah Johnson</td>
                         <td class="contact-info">(555) 123-4567</td>
-                        <td class="contact-info">sarah.johnson@email.com</td>
+                        <td class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1b687a697a7335717473756874755b7e767a727735787476">[email&#160;protected]</a></td>
                         <td>Jan 15, 2024</td>
                         <td>Jan 14, 2026</td>
                         <td>123 Main Street, Unit 4B</td>
@@ -670,7 +194,7 @@
                     <tr>
                         <td class="resident-name">Michael Chen</td>
                         <td class="contact-info">(555) 234-5678</td>
-                        <td class="contact-info">m.chen@email.com</td>
+                        <td class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a672469626f644a6f676b636624696567">[email&#160;protected]</a></td>
                         <td>Mar 1, 2023</td>
                         <td>Feb 28, 2025</td>
                         <td>123 Main Street, Unit 7A</td>
@@ -678,7 +202,7 @@
                     <tr>
                         <td class="resident-name">Emily Rodriguez</td>
                         <td class="contact-info">(555) 345-6789</td>
-                        <td class="contact-info">emily.r@email.com</td>
+                        <td class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="492c24202530673b092c24282025672a2624">[email&#160;protected]</a></td>
                         <td>Sep 1, 2024</td>
                         <td>Aug 31, 2026</td>
                         <td>456 Oak Avenue, Unit 101</td>
@@ -686,7 +210,7 @@
                     <tr>
                         <td class="resident-name">David Kim</td>
                         <td class="contact-info">(555) 456-7890</td>
-                        <td class="contact-info">david.kim@email.com</td>
+                        <td class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147075627d703a7f7d79547179757d783a777b79">[email&#160;protected]</a></td>
                         <td>Jun 15, 2023</td>
                         <td>Jun 14, 2025</td>
                         <td>456 Oak Avenue, Unit 205</td>
@@ -694,7 +218,7 @@
                     <tr>
                         <td class="resident-name">James Anderson</td>
                         <td class="contact-info">(555) 567-8901</td>
-                        <td class="contact-info">j.anderson@email.com</td>
+                        <td class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02682c636c666770716d6c42676f636b6e2c616d6f">[email&#160;protected]</a></td>
                         <td>Apr 1, 2024</td>
                         <td>Mar 31, 2026</td>
                         <td>789 Elm Street, Unit 3C</td>
@@ -702,7 +226,7 @@
                     <tr>
                         <td class="resident-name">Lisa Martinez</td>
                         <td class="contact-info">(555) 678-9012</td>
-                        <td class="contact-info">lisa.martinez@email.com</td>
+                        <td class="contact-info"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94f8fde7f5baf9f5e6e0fdfaf1eed4f1f9f5fdf8baf7fbf9">[email&#160;protected]</a></td>
                         <td>Dec 1, 2023</td>
                         <td>Nov 30, 2025</td>
                         <td>789 Elm Street, Unit 5A</td>
@@ -712,73 +236,8 @@
         </div>
     </main>
 
-    <script>
-        // Submenu Toggle
-        document.querySelectorAll('[data-submenu]').forEach(navLink => {
-            navLink.addEventListener('click', function() {
-                const submenuId = this.getAttribute('data-submenu') + '-submenu';
-                const submenu = document.getElementById(submenuId);
-                const chevron = this.querySelector('.chevron');
-                
-                // Toggle submenu
-                submenu.classList.toggle('open');
-                chevron.classList.toggle('open');
-            });
-        });
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-        mobileMenuBtn.addEventListener('click', function() {
-            sidebar.classList.toggle('open');
-            sidebarOverlay.classList.toggle('show');
-        });
-
-        sidebarOverlay.addEventListener('click', function() {
-            sidebar.classList.remove('open');
-            sidebarOverlay.classList.remove('show');
-        });
-
-        // Logout button
-        document.querySelector('.logout-btn').addEventListener('click', function() {
-            window.location.href = 'index.html';
-        });
-
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
-        const tableRows = document.querySelectorAll('.residents-table tbody tr');
-
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase().trim();
-
-            tableRows.forEach(row => {
-                const name = row.cells[0].textContent.toLowerCase();
-                const phone = row.cells[1].textContent.toLowerCase();
-                const email = row.cells[2].textContent.toLowerCase();
-                const address = row.cells[5].textContent.toLowerCase();
-
-                if (searchTerm === '' || 
-                    name.includes(searchTerm) || 
-                    phone.includes(searchTerm) || 
-                    email.includes(searchTerm) || 
-                    address.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-
-        // Prevent default for nav links (for demo purposes)
-        document.querySelectorAll('.nav-link, .submenu-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href') === '#') {
-                    e.preventDefault();
-                }
-            });
-        });
-    </script>
+    <script src="js/app.js"></script>
+    <script src="js/residents.js"></script>
 </body>
 </html>

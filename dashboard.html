@@ -7,424 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --pistachio: #93C572;
-            --pistachio-dark: #6B9B4D;
-            --pistachio-light: #B5D99C;
-            --shell-brown: #8B7355;
-            --cream: #FAF8F3;
-            --sand: #E8E3D6;
-            --charcoal: #2C2C2C;
-            --white: #FFFFFF;
-            --gray-light: #D4CFC0;
-            --gray-medium: #9B9B9B;
-            --sidebar-width: 280px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--cream);
-            min-height: 100vh;
-            display: flex;
-            overflow-x: hidden;
-        }
-
-        /* Sidebar Navigation */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: var(--white);
-            border-right: 1px solid var(--gray-light);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            overflow-y: auto;
-            z-index: 100;
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-header {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .logo {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--charcoal);
-            letter-spacing: -0.03em;
-            margin-bottom: 1.5rem;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            background: var(--cream);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--pistachio-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .user-avatar svg {
-            width: 20px;
-            height: 20px;
-            color: var(--pistachio-dark);
-        }
-
-        .user-details {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .user-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--charcoal);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .user-role {
-            font-size: 0.75rem;
-            color: var(--gray-medium);
-        }
-
-        .logout-btn {
-            padding: 0.5rem 1rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.813rem;
-            font-weight: 500;
-            color: var(--gray-medium);
-            background: transparent;
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .logout-btn:hover {
-            background: var(--cream);
-            border-color: var(--pistachio);
-            color: var(--pistachio-dark);
-        }
-
-        /* Navigation Menu */
-        .nav-menu {
-            padding: 1rem 0;
-            flex: 1;
-        }
-
-        .nav-item {
-            margin-bottom: 0.25rem;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1.5rem;
-            color: var(--charcoal);
-            text-decoration: none;
-            font-size: 0.938rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .nav-link:hover {
-            background: var(--cream);
-            color: var(--pistachio-dark);
-        }
-
-        .nav-link.active {
-            background: var(--pistachio-light);
-            color: var(--pistachio-dark);
-            font-weight: 600;
-        }
-
-        .nav-link-content {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .nav-icon {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-        }
-
-        .chevron {
-            width: 16px;
-            height: 16px;
-            transition: transform 0.3s ease;
-        }
-
-        .chevron.open {
-            transform: rotate(180deg);
-        }
-
-        /* Submenu */
-        .submenu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .submenu.open {
-            max-height: 500px;
-        }
-
-        .submenu-link {
-            display: block;
-            padding: 0.625rem 1.5rem 0.625rem 3.25rem;
-            color: var(--gray-medium);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 400;
-            transition: all 0.3s ease;
-        }
-
-        .submenu-link:hover {
-            color: var(--pistachio-dark);
-            background: var(--cream);
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            padding: 2rem;
-            min-height: 100vh;
-        }
-
-        .page-header {
-            margin-bottom: 2rem;
-        }
-
-        .page-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--charcoal);
-            margin-bottom: 0.5rem;
-        }
-
-        .page-subtitle {
-            font-size: 1rem;
-            color: var(--gray-medium);
-        }
-
-        /* Dashboard Grid */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 1px solid var(--gray-light);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--gray-medium);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--charcoal);
-            line-height: 1;
-        }
-
-        .stat-card.pistachio .stat-value {
-            color: var(--pistachio-dark);
-        }
-
-        /* Section Cards */
-        .section-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--gray-light);
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--charcoal);
-            margin-bottom: 1.5rem;
-        }
-
-        .reminder-item, .invoice-item {
-            padding: 1rem;
-            background: var(--cream);
-            border-radius: 12px;
-            margin-bottom: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .reminder-item:last-child, .invoice-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .item-label {
-            font-size: 0.938rem;
-            font-weight: 500;
-            color: var(--charcoal);
-        }
-
-        .item-value {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--pistachio-dark);
-        }
-
-        .item-value.warning {
-            color: #D97706;
-        }
-
-        .item-value.danger {
-            color: #DC2626;
-        }
-
-        /* Mobile Menu Toggle */
-        .mobile-menu-btn {
-            display: none;
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 101;
-            background: var(--white);
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            padding: 0.75rem;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .mobile-menu-btn svg {
-            width: 24px;
-            height: 24px;
-            color: var(--charcoal);
-        }
-
-        /* Sidebar Footer */
-        .sidebar-footer {
-            padding: 1.5rem 1.5rem 2rem;
-            border-top: 1px solid var(--gray-light);
-            margin-top: auto;
-        }
-
-        .sidebar-footer p {
-            font-size: 0.75rem;
-            color: var(--gray-medium);
-            font-weight: 400;
-            text-align: center;
-        }
-
-        .sidebar-footer a {
-            color: var(--pistachio-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .sidebar-footer a:hover {
-            color: var(--pistachio);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 5rem 1.5rem 1.5rem;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .page-title {
-                font-size: 1.5rem;
-            }
-
-            .stat-value {
-                font-size: 2rem;
-            }
-        }
-
-        /* Overlay for mobile */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 99;
-        }
-
-        .sidebar-overlay.show {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
-<body>
+<body class="dashboard-page">
     <!-- Mobile Menu Button -->
     <button class="mobile-menu-btn" id="mobileMenuBtn">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -566,94 +152,68 @@
     <main class="main-content">
         <div class="page-header">
             <h1 class="page-title">Dashboard</h1>
-            <p class="page-subtitle">Welcome back, Berkay! Here's your property overview.</p>
+            <p class="page-subtitle">Welcome back, Berkay! Here's what's happening with your properties today.</p>
         </div>
 
-        <!-- Statistics Grid -->
+        <!-- Statistics Cards -->
         <div class="dashboard-grid">
-            <div class="stat-card pistachio">
+            <div class="stat-card">
                 <div class="stat-label">Total Properties</div>
                 <div class="stat-value">12</div>
+                <div class="stat-trend">+2 this month</div>
             </div>
-            <div class="stat-card pistachio">
+            
+            <div class="stat-card">
                 <div class="stat-label">Total Tenants</div>
                 <div class="stat-value">28</div>
+                <div class="stat-trend">3 new leases</div>
             </div>
+            
             <div class="stat-card">
                 <div class="stat-label">Maintenance Requests</div>
                 <div class="stat-value">5</div>
+                <div class="stat-trend">2 urgent</div>
             </div>
         </div>
 
-        <!-- Reminders Section -->
-        <div class="section-card">
-            <h2 class="section-title">Reminders</h2>
-            <div class="reminder-item">
-                <div class="item-label">Due Dates</div>
-                <div class="item-value warning">8</div>
+        <!-- Information Sections -->
+        <div class="info-sections">
+            <div class="info-card">
+                <div class="info-header">
+                    <h2 class="info-title">Reminders</h2>
+                    <span class="info-count">11</span>
+                </div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="item-label">Due Dates</span>
+                        <span class="item-value">8</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="item-label">Past Due</span>
+                        <span class="item-value">3</span>
+                    </div>
+                </div>
             </div>
-            <div class="reminder-item">
-                <div class="item-label">Past Due</div>
-                <div class="item-value danger">3</div>
-            </div>
-        </div>
 
-        <!-- Invoices Section -->
-        <div class="section-card">
-            <h2 class="section-title">Invoices</h2>
-            <div class="invoice-item">
-                <div class="item-label">Open Invoices</div>
-                <div class="item-value">15</div>
-            </div>
-            <div class="invoice-item">
-                <div class="item-label">Past Due Invoices</div>
-                <div class="item-value danger">4</div>
+            <div class="info-card">
+                <div class="info-header">
+                    <h2 class="info-title">Invoices</h2>
+                    <span class="info-count">19</span>
+                </div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="item-label">Open Invoices</span>
+                        <span class="item-value">15</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="item-label">Past Due Invoices</span>
+                        <span class="item-value">4</span>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <script>
-        // Submenu Toggle
-        document.querySelectorAll('[data-submenu]').forEach(navLink => {
-            navLink.addEventListener('click', function() {
-                const submenuId = this.getAttribute('data-submenu') + '-submenu';
-                const submenu = document.getElementById(submenuId);
-                const chevron = this.querySelector('.chevron');
-                
-                // Toggle submenu
-                submenu.classList.toggle('open');
-                chevron.classList.toggle('open');
-            });
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-        mobileMenuBtn.addEventListener('click', function() {
-            sidebar.classList.toggle('open');
-            sidebarOverlay.classList.toggle('show');
-        });
-
-        sidebarOverlay.addEventListener('click', function() {
-            sidebar.classList.remove('open');
-            sidebarOverlay.classList.remove('show');
-        });
-
-        // Logout button
-        document.querySelector('.logout-btn').addEventListener('click', function() {
-            window.location.href = 'index.html';
-        });
-
-        // Prevent default for nav links (for demo purposes)
-        document.querySelectorAll('.nav-link, .submenu-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href') === '#') {
-                    e.preventDefault();
-                }
-            });
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
