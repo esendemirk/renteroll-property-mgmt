@@ -1,19 +1,40 @@
 // Payments Page JavaScript
+// Handles payment button interactions for the payment processing page
 
-// Pay Now button
-document.querySelectorAll('.btn-primary').forEach(btn => {
-    btn.addEventListener('click', function() {
-        if (this.textContent.includes('Pay Now')) {
-            alert('Processing payment...');
-        }
+/**
+ * Initialize payment button handlers
+ */
+function initializePaymentButtons() {
+    // Handle "Pay Now" primary button clicks
+    const payNowButtons = document.querySelectorAll('.payment-btn.primary');
+    payNowButtons.forEach(function(button) {
+        button.addEventListener('click', handlePayNowClick);
     });
-});
 
-// Schedule Payment button
-document.querySelectorAll('.btn-secondary').forEach(btn => {
-    btn.addEventListener('click', function() {
-        if (this.textContent.includes('Schedule')) {
-            alert('Opening payment scheduler...');
-        }
+    // Handle "Schedule Payment" secondary button clicks  
+    const scheduleButtons = document.querySelectorAll('.payment-btn.secondary');
+    scheduleButtons.forEach(function(button) {
+        button.addEventListener('click', handleScheduleClick);
     });
-});
+}
+
+/**
+ * Handle pay now button click
+ */
+function handlePayNowClick() {
+    alert('Processing payment...');
+}
+
+/**
+ * Handle schedule payment button click
+ */
+function handleScheduleClick() {
+    alert('Opening payment scheduler...');
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePaymentButtons);
+} else {
+    initializePaymentButtons();
+}
