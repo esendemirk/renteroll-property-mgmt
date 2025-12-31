@@ -1,0 +1,114 @@
+/* Residents Page Specific Styles */
+
+.residents-container {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--gray-light);
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.residents-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.residents-table thead {
+    background: var(--cream);
+}
+
+.residents-table th {
+    padding: 1rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.residents-table td {
+    padding: 1rem 1rem;
+    font-size: 0.813rem;
+    color: var(--charcoal);
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.residents-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.residents-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.residents-table tbody tr:hover {
+    background: var(--cream);
+}
+
+.resident-name {
+    font-weight: 600;
+    color: var(--charcoal);
+    font-size: 0.875rem;
+}
+
+.contact-info {
+    color: var(--gray-medium);
+    font-size: 0.75rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+    .residents-table th,
+    .residents-table td {
+        padding: 0.875rem 0.875rem;
+        font-size: 0.75rem;
+    }
+
+    .resident-name {
+        font-size: 0.813rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .residents-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .residents-table {
+        min-width: 900px;
+    }
+
+    .residents-table th,
+    .residents-table td {
+        padding: 0.75rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .resident-name {
+        font-size: 0.813rem;
+    }
+
+    .contact-info {
+        font-size: 0.688rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .residents-table th,
+    .residents-table td {
+        padding: 0.625rem 0.5rem;
+        font-size: 0.688rem;
+    }
+
+    .resident-name {
+        font-size: 0.75rem;
+    }
+
+    .contact-info {
+        font-size: 0.625rem;
+    }
+}
